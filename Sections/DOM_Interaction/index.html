@@ -1,0 +1,60 @@
+<script src="./../scripts/vue.js"></script>
+
+<div id="app">
+  
+  <!-- ### Disable re-rendering | not update if value is changed -->
+  <h1 v-once>{{title}}</h1>
+
+  <!-- ### Interpolation {{}}  -->
+  <p>{{title}}</p>
+  <p>{{sayHello()}}</p>
+
+  <!-- ### Binding To a Attribites -->
+  <a v-bind:href="link">Google</a>
+
+  <!-- ### Output Raw HTML  | Leads to cross side scripting issues -->
+  <p v-html="finishedLink"></p>
+
+  <hr>
+
+  <!-- ### Events -->
+  <button v-on:click='incrementCounter(2, $event)' >Click Me</button>
+  <p>{{counter}}</p>
+  <p v-on:mousemove='updateCoordinates'>Coordinates: {{x}} / {{y}}
+    --<span v-on:mousemove.stop=''>DEAD SPOT....</span></p>
+
+  <!-- ### Keyboard Events -->
+  <input type="text" v-on:keyup.space.enter='onEnterEvent'>
+  
+  
+
+</div>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      title: "Hello World!",
+      link:'https://google.com',
+      finishedLink: '<a href="https://google.com">Google</a>',
+      counter: 0,
+      x:0,
+      y:0
+    },
+    methods:{
+      sayHello: function(){
+        this.title = 'Hellowww!';
+        return this.title;
+      },
+      incrementCounter: function(step,event){
+        this.counter+=step;
+      },
+      updateCoordinates: function(event){
+        this.x = event.clientX;
+        this.y = event.clientY;
+      },
+      onEnterEvent: function(){
+        console.log("you may have pressed space or Enter");
+      }
+    }
+  });
+</script>
