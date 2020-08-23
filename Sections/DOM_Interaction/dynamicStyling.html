@@ -1,0 +1,56 @@
+<script src="./../scripts/vue.js"></script>
+
+<style>
+    .demo {
+        width: 100px;
+        height: 100px;
+        background-color: #ccc;
+        display: inline-block;
+        margin: 10px;
+    }
+
+    .red {
+        background-color: red;
+    }
+
+    .green {
+        background-color: green;
+    }
+
+    .blue {
+        background-color: blue;
+    }
+</style>
+
+
+<div id='app'>
+    <div class='demo' @click='redApplied = !redApplied' :class="{red:redApplied}"></div>
+
+    <!-- ## Using object -->
+    <div class='demo' @click='redApplied = !redApplied' :class="divClasses"></div>
+
+    <div class='demo' :class=[divClasses,color]></div>
+
+
+    <hr>
+    <input type="text" v-model='color' />
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            redApplied: false,
+            color:'green'
+        },
+        computed: {
+            divClasses: function(){
+                return{
+                    red: this.redApplied,
+                    blue: !this.redApplied
+                }
+            }
+        }
+    })
+</script>
