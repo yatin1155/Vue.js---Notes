@@ -26,6 +26,12 @@
   <!-- ### Keyboard Events -->
   <input type="text" v-on:keyup.space.enter='onEnterEvent'>
   
+
+  <hr>
+  <!-- ### Two-way binding  -->
+  <input type="text" v-model="name">
+  <p>{{name}}</p>
+
   
 
 </div>
@@ -38,7 +44,8 @@
       finishedLink: '<a href="https://google.com">Google</a>',
       counter: 0,
       x:0,
-      y:0
+      y:0,
+      name:''
     },
     methods:{
       sayHello: function(){

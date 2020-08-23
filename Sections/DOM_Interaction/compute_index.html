@@ -1,0 +1,46 @@
+<script src="./../scripts/vue.js"></script>
+
+<div id="app">
+     <button v-on:click='counter++'>Increase</button>
+     <button v-on:click='counter--'>Decrease</button>
+     <button v-on:click='secondCounter++'>Increase Second</button>
+    <p>Counter: {{counter}} | {{secondCounter}}</p>
+    <p>Result: {{result()}}  |  {{output}}</p>
+</div>
+
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            counter: 0,
+            secondCounter:0
+        },
+        methods:{
+             // These func will run everytime if the prop is changed or not
+            result:function(){
+                console.log("methods");
+                return this.counter > 5 ? 'Greater than 5': 'Less than 5' ;
+               
+            }
+        },
+        computed: {
+            //these function is executed only when the associated property is changed.
+            // computed func is considered as a prop, this {{output}} not as {{output()}}
+            // NOTE: Better optimization and is used for sync operations
+            output:function(){
+                console.log("computed")
+                return this.counter > 5 ? 'Greater than 5': 'Less than 5' 
+            }
+        },
+        watch: {
+            // Same features as compute but async code is executed
+            counter: function(){
+                console.log("watch");
+                var vm = this;
+                setTimeout(()=>{
+                    vm.counter = 0;
+                },3000)
+            }
+        }
+    })
+</script>
