@@ -1,0 +1,56 @@
+<script src="./../scripts/vue.js"></script>
+
+<div id="app">
+
+    <!-- ### v-for - Loops over the data  -->
+    <ul>
+        <li v-for='ingredient in ingredients'>{{ingredient}} </li>
+        <li v-for='(ingredient,index) in ingredients'>{{ingredient}} -- ({{index}})</li>
+    </ul>
+
+    <hr>
+    <!-- ### alternative for V-for -->
+    <template v-for='(ingredient,index) in ingredients'>
+        <h3>{{ingredient}}</h3>
+        <p>{{index}}</p>
+    </template>
+
+    <hr>
+
+    <!-- ### looping through objects -->
+    <ul>
+        <li v-for='person in persons'> 
+            <div v-for='(values,key, index) in person'>{{key}} - {{ values }} - {{index}}</div>
+        </li>
+    </ul>
+
+    <!-- ### Looping through numbers -->
+    <span v-for="n in 10">{{ n }}</span>
+
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            ingredients: ['meat', 'fruits', 'cookies'],
+            persons: [{
+                    name: 'Yatin',
+                    age: 27,
+                    color: 'red'
+                },
+                {
+                    name: 'Lokesh',
+                    age: 25,
+                    color: 'green'
+                },
+                {
+                    name: 'Saurabh',
+                    age: 26,
+                    color: 'blue'
+                },
+            ]
+        }
+    })
+</script>
