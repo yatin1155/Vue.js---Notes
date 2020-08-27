@@ -1,11 +1,11 @@
 <template>
-  <h1> Hello World</h1>
+<div>
+  <app-servers></app-servers>
+</div>
 </template>
 
 <script>
-export default {
  
-}
 </script>
 
 <style>
