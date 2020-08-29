@@ -6,14 +6,17 @@
         <p>Reversed Name: {{switchName()}}</p>
         <button @click="resetName">RESET Name</button>
         <button @click="resetFn()">RESET Name</button>
+        <p>Counter: {{counter}}</p>
     </div>
 </template>
 
 <script>
+import {eventBus} from '../main'
     export default {
         props:{
             name: String,
-            resetFn: Function
+            resetFn: Function,
+            counter:Number
         },
         methods:{
             switchName(){
@@ -23,6 +26,11 @@
                 this.name = 'Yatin';
                 this.$emit('nameWasReset',this.name)
             }
+        },
+        created(){
+            eventBus.$on('onCounterUpdate',(data)=>{
+                this.counter = data;
+            });
         }
     }
 </script>
