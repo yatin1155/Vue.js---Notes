@@ -1,6 +1,18 @@
 <template>
     <div>
-        <p>A wonderful Quote!</p>
+        <!-- <p>{{quote}}</p> -->
+
+        <!-- using normal slot -->
+        <!-- <slot></slot> -->
+
+        <!-- Named slot -->
+        <div class="title">
+            <slot name="title"></slot>
+        </div>
+        <hr>
+        <div>
+            <slot name="content"></slot>
+        </div>
     </div>
 </template>
 
@@ -17,5 +29,8 @@ div{
     padding: 30px;
     margin: 30px auto;
     text-align: center;
+}
+h1{
+    color: tomato;
 }
 </style>
