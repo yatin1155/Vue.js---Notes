@@ -13,14 +13,8 @@
 
                 <h1>User Info Form</h1>
                 <hr />
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" class="form-control" v-model.lazy="userData.firstName" />
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" class="form-control" v-model.lazy="userData.lastName" />
-                </div>
+                <name-control @getFullName = 'userData.fullName = $event'></name-control>
+
                 <div class="form-group">
                     <label for="email">Mail</label>
                     <input type="email" id="email" class="form-control" v-model.lazy="userData.email" />
@@ -64,7 +58,7 @@
             <h4>Your Data</h4>
           </div>
           <div class="panel-body">
-            <p>Full Name: {{userData.firstName}} {{userData.lastName}}</p>
+            <p>Full Name: {{userData.fullName}}</p>
             <p>Mail: {{userData.email}}</p>
             <p>Password: {{userData.password}}</p>
             <p>Store in Database?: {{userData.storeData}}</p>
@@ -76,6 +70,8 @@
 </template>
 
 <script>
+
+import NameControl from './NameControl.vue'
 export default {
   data() {
     return {
@@ -84,7 +80,8 @@ export default {
         lastName: "",
         email: "",
         password: "",
-        storeData: "Yes"
+        storeData: "Yes",
+        fullName: ''
       },
       isSumbitted: false
     };
@@ -92,8 +89,15 @@ export default {
   methods :{
       onSubmit(){
           this.isSumbitted = true;
+      },
+      updateFullName($event){
+        this.userData.firstName = $event;
       }
-  }
+  },
+  components: {
+      NameControl: NameControl
+  },
+  
 };
 </script>
 
