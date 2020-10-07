@@ -1,60 +1,53 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <h1>Filters and Mixins</h1>
+    <p>{{text}}</p>
+    <p>{{text | toUppercase }}</p>
+
+    <!-- Global filter  -->
+    <p>{{text2 |toLowerCase}}</p>
+
+    <hr>
+    <input type="text" v-model="filterText">
     <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
+      <li v-for='fruit in filteredFruits'>{{fruit}}</li>
     </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+
+  <hr>
+  <app-list></app-list>
   </div>
 </template>
 
 <script>
+
+import List from './List.vue';
+import { fruitMixin } from './fruitMixin';
 export default {
-  name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      text: "hello yatin",
+      text2: "YATIN KAPOOR",
+     
     }
+  },
+  filters: {
+    toUppercase(value){
+      return value.toUpperCase();
+    }
+  },
+  computed: {
+    filteredFruits(){
+      return this.fruits.filter((element)=>{
+        return element.match(this.filterText)
+      })
+    }
+  },
+  components:{
+    appList : List
+  },
+  mixins: [fruitMixin],
+  created(){
+    console.log("creared App")
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>
